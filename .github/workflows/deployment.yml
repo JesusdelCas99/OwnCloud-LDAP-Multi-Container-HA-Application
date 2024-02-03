@@ -20,7 +20,7 @@ jobs:
       run: |
         docker ps --format '{{.Names}}'
         container_count=$(docker ps --format '{{.Names}}' | wc -l)
-        if [ $container_count -ne 2 ]; then
+        if [ $container_count -ne 8 ]; then
           echo "Error: Expected 8 containers, but found $container_count containers."
           exit 1
         fi
