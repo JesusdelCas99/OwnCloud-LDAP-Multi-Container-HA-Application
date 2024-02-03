@@ -1,0 +1,26 @@
+name: Docker Compose Up
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Docker Compose Up
+      run: docker-compose up -d
+      
+    - name: Verify Containers
+      run: |
+        docker ps --format '{{.Names}}'
+        container_count=$(docker ps --format '{{.Names}}' | wc -l)
+        if [ $container_count -ne 6 ]; then
+          echo "Error: Expected 6 containers, but found $container_count containers."
+          exit 1
+        fi
