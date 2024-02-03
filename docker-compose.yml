@@ -1,0 +1,114 @@
+version: '3'
+
+
+services:
+  owncloud:
+    image: owncloud/server:latest
+    networks:
+      - red_web
+      - red_servicios
+    deploy:
+      replicas: 3
+    volumes:
+      - data_owncloud:/mnt/data
+    depends_on:
+      - redis
+    env_file:
+      - ./owncloud/owncloud.env
+
+
+  phpldapadmin:
+    container_name: phpldapadmin
+    image: osixia/phpldapadmin:latest
+    ports:
+      - "8081:80"
+    networks:
+      red_web:
+        ipv4_address: 192.168.10.6
+      red_servicios:
+        ipv4_address: 192.168.20.41
+    depends_on:
+      - openldap
+    env_file:
+      - ./phpldapadmin/phpldapadmin.env
+
+
+  openldap:
+    container_name: openldap
+    image: osixia/openldap:1.5.0
+    command: --loglevel debug
+    networks:
+      red_servicios:
+        ipv4_address: 192.168.20.40
+    volumes:
+      - data_openldap:/var/lib/ldap
+      - conf_openldap:/etc/ldap/slapd.d
+    env_file:
+      - ./openldap/openldap.env
+
+
+  redis:
+    container_name: redis
+    image: redis:alpine
+    networks:
+      red_servicios:
+        ipv4_address: 192.168.20.30
+    volumes:
+      - data_redis:/data
+
+
+  mariadb:
+    container_name: mariadb
+    image: mariadb
+    networks:
+      red_servicios:
+        ipv4_address: 192.168.20.20
+    volumes:
+      - data_mariadb:/var/lib/mysql
+    env_file:
+      - ./mariadb/mariadb.env
+
+
+  haproxy:
+    container_name: haproxy
+    image: haproxy:2.3
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy
+    depends_on:
+      - owncloud
+    ports:
+      - "8080:8080"  
+      - "8082:8082" 
+    networks:
+      red_web:
+        ipv4_address: 192.168.10.20
+
+
+
+networks:
+  red_web:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.10.0/24
+
+  red_servicios:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.20.0/24
+
+
+
+volumes:
+  data_owncloud:
+    driver: local
+  data_openldap:
+    driver: local
+  conf_openldap:
+    driver: local
+  data_redis:
+    driver: local
+  data_mariadb:
+    driver: local
+  
