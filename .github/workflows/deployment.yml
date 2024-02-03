@@ -1,4 +1,4 @@
-name: Docker Compose Up
+name: Deployment
 
 on:
   push:
