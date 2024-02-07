@@ -1,4 +1,4 @@
-# Usuarios
+# Users
 dn: cn=Jose Manuel Soto Hidalgo,cn=migrupo,ou=miorganizacion,dc=miejemploowncloud,dc=com
 objectClass: inetOrgPerson
 objectClass: posixAccount
