@@ -1,0 +1,17 @@
+# Definición de la organización
+dn: dc=miejemploowncloud,dc=com
+objectClass: dcObject
+objectClass: organization
+dc: miejemploowncloud
+o: miorganizacion
+
+# Unidad Organizativa para usuarios
+dn: ou=miorganizacion,dc=miejemploowncloud,dc=com
+objectClass: organizationalUnit
+ou: miorganizacion
+
+# Grupo para usuarios
+dn: cn=migrupo,ou=miorganizacion,dc=miejemploowncloud,dc=com
+objectClass: posixGroup
+cn: migrupo
+gidNumber: 1001

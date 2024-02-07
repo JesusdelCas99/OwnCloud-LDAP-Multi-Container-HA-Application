@@ -1,0 +1,70 @@
+# Usuarios
+dn: cn=Jose Manuel Soto Hidalgo,cn=migrupo,ou=miorganizacion,dc=miejemploowncloud,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Jose Manuel Soto Hidalgo
+sn: Soto Hidalgo
+givenName: Jose Manuel
+uid: jose
+userPassword: password1
+uidNumber: 1001
+gidNumber: 1001
+homeDirectory: /home/jose
+loginShell: /bin/bash
+
+dn: cn=Juan Perez,cn=migrupo,ou=miorganizacion,dc=miejemploowncloud,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Juan Perez
+sn: Perez
+givenName: Juan
+uid: juan
+userPassword: password2
+uidNumber: 1002
+gidNumber: 1001
+homeDirectory: /home/juan
+loginShell: /bin/bash
+
+dn: cn=Maria Garcia,cn=migrupo,ou=miorganizacion,dc=miejemploowncloud,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Maria Garcia
+sn: Garcia
+givenName: Maria
+uid: maria
+userPassword: password3
+uidNumber: 1003
+gidNumber: 1001
+homeDirectory: /home/maria
+loginShell: /bin/bash
+
+dn: cn=Carlos Lopez,cn=migrupo,ou=miorganizacion,dc=miejemploowncloud,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Carlos Lopez
+sn: Lopez
+givenName: Carlos
+uid: carlos
+userPassword: password4
+uidNumber: 1004
+gidNumber: 1001
+homeDirectory: /home/carlos
+loginShell: /bin/bash
+
+dn: cn=Ana Martinez,cn=migrupo,ou=miorganizacion,dc=miejemploowncloud,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Ana Martinez
+sn: Martinez
+givenName: Ana
+uid: ana
+userPassword: password5
+uidNumber: 1005
+gidNumber: 1001
+homeDirectory: /home/ana
+loginShell: /bin/bash
