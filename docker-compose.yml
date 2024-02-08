@@ -14,7 +14,7 @@ services:
     depends_on:
       - redis
     env_file:
-      - ./owncloud/owncloud.env
+      - ./env/owncloud/owncloud.env
 
 
   phpldapadmin:
@@ -30,7 +30,7 @@ services:
     depends_on:
       - openldap
     env_file:
-      - ./phpldapadmin/phpldapadmin.env
+      - ./env/phpldapadmin/phpldapadmin.env
 
 
   openldap:
@@ -44,7 +44,7 @@ services:
       - data_openldap:/var/lib/ldap
       - conf_openldap:/etc/ldap/slapd.d
     env_file:
-      - ./openldap/openldap.env
+      - ./env/openldap/openldap.env
 
 
   redis:
@@ -66,14 +66,14 @@ services:
     volumes:
       - data_mariadb:/var/lib/mysql
     env_file:
-      - ./mariadb/mariadb.env
+      - ./env/mariadb/mariadb.env
 
 
   haproxy:
     container_name: haproxy
     image: haproxy:2.3
     volumes:
-      - ./haproxy:/usr/local/etc/haproxy
+      - ./volumes/haproxy:/usr/local/etc/haproxy
     depends_on:
       - owncloud
     ports:
