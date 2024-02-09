@@ -1,7 +1,7 @@
 version: '3'
 
-
 services:
+
   owncloud:
     image: owncloud/server:latest
     networks:
@@ -13,9 +13,9 @@ services:
       - data_owncloud:/mnt/data
     depends_on:
       - redis
+      - mariadb
     env_file:
       - ./env/owncloud/owncloud.env
-
 
   phpldapadmin:
     container_name: phpldapadmin
@@ -32,7 +32,6 @@ services:
     env_file:
       - ./env/phpldapadmin/phpldapadmin.env
 
-
   openldap:
     container_name: openldap
     image: osixia/openldap:1.5.0
@@ -46,7 +45,6 @@ services:
     env_file:
       - ./env/openldap/openldap.env
 
-
   redis:
     container_name: redis
     image: redis:alpine
@@ -56,10 +54,11 @@ services:
     volumes:
       - data_redis:/data
 
-
   mariadb:
     container_name: mariadb
     image: mariadb
+    ports:
+      - "3306:3306"
     networks:
       red_servicios:
         ipv4_address: 192.168.20.20
@@ -67,7 +66,6 @@ services:
       - data_mariadb:/var/lib/mysql
     env_file:
       - ./env/mariadb/mariadb.env
-
 
   haproxy:
     container_name: haproxy
@@ -83,8 +81,6 @@ services:
       red_web:
         ipv4_address: 192.168.10.20
 
-
-
 networks:
   red_web:
     driver: bridge
@@ -98,8 +94,6 @@ networks:
       config:
         - subnet: 192.168.20.0/24
 
-
-
 volumes:
   data_owncloud:
     driver: local
@@ -111,4 +105,5 @@ volumes:
     driver: local
   data_mariadb:
     driver: local
+
   
